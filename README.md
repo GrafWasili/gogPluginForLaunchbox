@@ -29,6 +29,7 @@ After installing you have to set the path for the game's executable yourself.
 
 Download the binaries from [here](https://forums.launchbox-app.com/files/file/1283-gogcom-plugin/) and copy the gogplugin folder into the Launchbox plugin folder.
 
+If necessary unblock the .dll libraries via context menu -> Properties.
 
 ## Contribute
 
