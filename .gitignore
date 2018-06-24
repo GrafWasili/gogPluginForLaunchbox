@@ -273,6 +273,6 @@ packages/
 locales/
 gogPlugin/Settings.cs
 gogPlugin/properties
-gogLaunchboxPlugin.sln
-gogPlugin/GogPlugin.csproj
+*.sln
+*.csproj
 
