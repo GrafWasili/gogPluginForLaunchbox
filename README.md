@@ -45,7 +45,7 @@ To use the source code in a new Visual Studio 2017 project follow this steps:
 In gogData.cs you can find a lot of automatically generated classes for deserializing calls to the gog api with json.net for getting game information. Most of them are yet unused but should provide a good base for additional features.
 
 Unofficial gog API docuentation: https://gogapidocs.readthedocs.io/en/latest/
-Tool forgenerating C# classes from json structures: http://json2csharp.com/
+Tool for generating C# classes from json structures: http://json2csharp.com/
 
 
 Launchbox Forum thread: https://forums.launchbox-app.com/topic/45589-work-in-progress-gogcom-plugin/
