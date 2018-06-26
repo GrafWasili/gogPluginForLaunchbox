@@ -1,5 +1,7 @@
 Version 0.1
 
+*Only works on 64-bit installs of Launchbox*
+
 ## About
 
 A plugin for Launchbox that allows adding non-installed games from gog.com.
@@ -11,7 +13,6 @@ Excuse the sloppy and inconsistent code, it's the first C#/.NET/Visual Studio pr
 - store authentication token so no further login is needed
 - select platform for games import
 - option to skip already imported games and games with the same title
-
 
 At the moment there are two import modes:
 
@@ -27,9 +28,11 @@ After installing you have to set the path for the game's executable yourself.
 
 ## Download and Installation
 
-Download the binaries from [here](https://forums.launchbox-app.com/files/file/1283-gogcom-plugin/) and copy the gogplugin folder into the Launchbox plugin folder.
+Download the binaries from [here](https://forums.launchbox-app.com/files/file/1283-gogcom-plugin/) unzip and copy the contents of bin/ to a new folder in the Launchbox plugin folder (e.g. launchbox/plugins/gogplugin).
 
 If necessary unblock the .dll libraries via context menu -> Properties.
+
+You should now find the item "import games from gog.com" in the tools menu of Launchbox.
 
 ## Contribute
 
