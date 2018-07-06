@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
@@ -9,8 +8,6 @@ using Newtonsoft.Json;
 
 using Unbroken.LaunchBox.Plugins;
 using Unbroken.LaunchBox.Plugins.Data;
-using Newtonsoft.Json.Serialization;
-using System.IO;
 using Newtonsoft.Json.Linq;
 using gogPlugin.forms;
 
