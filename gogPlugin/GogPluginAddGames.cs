@@ -26,7 +26,18 @@ namespace gogPlugin
     {
 
         public string Caption { get { return "Add Games From gog.com"; } }
-        public System.Drawing.Image IconImage { get { return null; } }
+        public System.Drawing.Image IconImage {
+            get
+            {
+                try
+                {
+                    return System.Drawing.Image.FromFile(@".\Plugins\gogPlugin\logo.png");
+                } catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
         public bool ShowInLaunchBox { get { return true; } }
         public bool ShowInBigBox { get { return false; } }
         public bool AllowInBigBoxWhenLocked { get { return false; } }
@@ -91,7 +102,6 @@ namespace gogPlugin
         public void OnSelected()
         {
             webClient = new WebClient();
-
             if (authenticate())
             {
                 GetGames();

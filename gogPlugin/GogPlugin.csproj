@@ -152,7 +152,7 @@
   <Import Project="packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" />
   <Import Project="packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets" Condition="Exists('packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>for /F %25%25x in ('dir /b "D:\Spiele\LaunchBox\Plugins\gogPlugin\" ^| findstr /v "Newtonsoft.Json.dll GogPlugin.dll GogPlugin.dll.config"') do del /F /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"
+    <PostBuildEvent>for /F %25%25x in ('dir /b "D:\Spiele\LaunchBox\Plugins\gogPlugin\" ^| findstr /v "Newtonsoft.Json.dll GogPlugin.dll GogPlugin.dll.config logo.png"') do del /F /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"
 for /F %25%25x in ('dir /b /ad "D:\Spiele\LaunchBox\Plugins\gogPlugin\"') do rmdir /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"	</PostBuildEvent>
   </PropertyGroup>
 </Project>
