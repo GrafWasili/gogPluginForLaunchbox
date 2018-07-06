@@ -20,14 +20,19 @@ namespace gogPlugin
             {
 
                 GogData.load();
-                string launchboxDir = AppDomain.CurrentDomain.BaseDirectory;
 
-                libraryLoader = new CefLibraryHandle($@"{launchboxDir}\CefSharp\x64\");
-                bool isValid = !libraryLoader.IsInvalid;
+                if (!Cef.IsInitialized)
+                {
+                    string launchboxDir = AppDomain.CurrentDomain.BaseDirectory;
 
-                CefSettings settings = new CefSettings();
-                settings.BrowserSubprocessPath = $@"{launchboxDir}\CefSharp\x64\CefSharp.BrowserSubprocess.exe";
-                Cef.Initialize(settings);
+                    libraryLoader = new CefLibraryHandle($@"{launchboxDir}\CefSharp\x64\");
+                    bool isValid = !libraryLoader.IsInvalid;
+
+                    CefSettings settings = new CefSettings();
+                    settings.BrowserSubprocessPath = $@"{launchboxDir}\CefSharp\x64\CefSharp.BrowserSubprocess.exe";
+
+                    Cef.Initialize(settings);
+                }
 
             }
             else if (eventType.Equals("LaunchBoxShutdownBeginning"))
