@@ -273,5 +273,5 @@ packages/
 locales/
 gogPlugin/Settings.cs
 gogPlugin/properties
-*.csproj
+*.sln
 
