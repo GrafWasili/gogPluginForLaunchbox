@@ -25,7 +25,13 @@ namespace gogPlugin.forms
         public ImportOptions(GogPluginAddGames plugin)
         {
             InitializeComponent();
-            this.plugin = plugin;            
+            this.plugin = plugin;
+
+            Bitmap b = (Bitmap)plugin.IconImage;
+            IntPtr pIcon = b.GetHicon();
+            Icon i = Icon.FromHandle(pIcon);
+            this.Icon = i;
+
             this.skipImported = this.checkBoxSkipImported.Checked;
             this.skipByTitle = this.checkBoxSkipTitle.Checked;
             this.galaxyPathTextBox.Text = this.galaxyPathBowser.RootFolder.ToString();

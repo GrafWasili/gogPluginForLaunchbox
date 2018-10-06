@@ -21,6 +21,12 @@ namespace gogPlugin.forms
             this.plugin = plugin;
             this.FormClosing += this.ShutdownBrowser;
             this.FormClosed += plugin.BrowserClosed;
+
+            Bitmap b = (Bitmap)plugin.IconImage;
+            IntPtr pIcon = b.GetHicon();
+            Icon i = Icon.FromHandle(pIcon);
+            this.Icon = i;
+
             InitBrowser();
         }
 

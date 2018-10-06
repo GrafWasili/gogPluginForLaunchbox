@@ -38,13 +38,14 @@
             this.progressBar1.Size = new System.Drawing.Size(530, 23);
             this.progressBar1.TabIndex = 0;
             // 
-            // Form1
+            // ProgressForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 57);
             this.Controls.Add(this.progressBar1);
-            this.Name = "Form1";
+            this.Name = "ProgressForm";
+            this.ShowIcon = false;
             this.Text = "Form1";
             this.ResumeLayout(false);
 

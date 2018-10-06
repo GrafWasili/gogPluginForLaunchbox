@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace gogPlugin.forms
@@ -14,6 +15,11 @@ namespace gogPlugin.forms
             this.FormClosed += plugin.ImportFormClosed;
             this.Shown += setDownloadValues;
             this.importGamesBind.DataSource = plugin.gamesFound;
+
+            Bitmap b = (Bitmap)plugin.IconImage;
+            IntPtr pIcon = b.GetHicon();
+            Icon i = Icon.FromHandle(pIcon);
+            this.Icon = i;
         }
 
         private void setDownloadValues(object sender, EventArgs e)
