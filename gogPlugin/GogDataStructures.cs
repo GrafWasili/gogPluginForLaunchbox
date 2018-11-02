@@ -1,26 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.IO;
-using System.Windows.Forms;
 
-using FileUtils = System.IO.File;
-
-using Dlc = gogPlugin.GogData.GameDetails;
+using Dlc = gogPlugin.GogDataStructures.GameDetails;
 
 namespace gogPlugin
 {
     // TODO: exclude and implement permanent data storage in different class (settings, user data?) 
 
-    public static class GogData
+    public static class GogDataStructures
     {
-
-        public static AuthData sessionData { get; set; } = null;
-        private static string tokenPath = ".\\Plugins\\gogPlugin\\token.gog";
-
         // data structure for storing gog.auth.com requests
         public class AuthData
         {
@@ -222,49 +210,6 @@ namespace gogPlugin
             public List<object> videos { get; set; }
             public List<object> related_products { get; set; }
             public object changelog { get; set; }
-        }
-
-        public static void save() {
-
-            if (sessionData == null || sessionData.refresh_token == null) return;
-
-            try
-            {                
-                if (FileUtils.Exists(tokenPath))
-                {
-                    FileUtils.Delete(tokenPath);
-                }
-                FileStream fs = FileUtils.Create(tokenPath);
-                StreamWriter writer = new StreamWriter (fs, Encoding.UTF8);
-                writer.WriteLine(sessionData.refresh_token);
-                writer.Flush();
-                writer.Close();
-                writer.Dispose();
-                fs.Close();
-                fs.Dispose();
-            }
-            catch (Exception e)
-            {
-                //file not yet created
-                MessageBox.Show(e.GetType().ToString() + ": " + e.Message + "\n\n" + e.StackTrace);
-            }
-        }
-
-        public static void load()
-        {
-            try
-            { 
-                StreamReader reader = new StreamReader(tokenPath);
-                sessionData = new AuthData();
-                sessionData.refresh_token = reader.ReadLine();
-                reader.Close();
-                reader.Dispose();
-            }
-            catch 
-            {
-                //file not yet created               
-            }
-           
         }
     }
 }

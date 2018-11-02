@@ -76,8 +76,8 @@ namespace gogPlugin
             public GameDownload _selectedDownload;
             public GameDownload selectedDownload {
                 get { return _selectedDownload; } set { _selectedDownload = value; } }
-            public GogData.GameDetails _gameDetails;
-            public GogData.MoreGameDetails _moreGameDetails;
+            public GogDataStructures.GameDetails _gameDetails;
+            public GogDataStructures.MoreGameDetails _moreGameDetails;
         }
 
         public class GameDownload
@@ -110,7 +110,7 @@ namespace gogPlugin
         
         private bool authenticate()
         {
-            if (GogData.sessionData == null || !getToken(null, true))
+            if (GogPlugin.sessionData == null || !getToken(null, true))
             {
                 LoginBrowser loginBrowser = new LoginBrowser(this);
                 loginBrowser.Show();
@@ -138,7 +138,7 @@ namespace gogPlugin
                 if (refresh)
                 {
                     json = webClient.DownloadString("https://auth.gog.com//token?client_id=46899977096215655&client_secret=9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9&grant_type=refresh_token&refresh_token="
-                       + GogData.sessionData.refresh_token);
+                       + GogPlugin.sessionData.refresh_token);
                 }
                 else
                 {
@@ -146,8 +146,8 @@ namespace gogPlugin
                        + loginCode
                        + "&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient");
                 }
-                GogData.sessionData = JsonConvert.DeserializeObject<GogData.AuthData>(json);
-                webClient.Headers.Add("Authorization", "Bearer " + GogData.sessionData.access_token);          
+                GogPlugin.sessionData = JsonConvert.DeserializeObject<GogDataStructures.AuthData>(json);
+                webClient.Headers.Add("Authorization", "Bearer " + GogPlugin.sessionData.access_token);          
                 return true;
 
             } catch (Exception e)
@@ -229,11 +229,11 @@ namespace gogPlugin
         private void GetGames_doWork(IProgress<int> progress)
         {
             string json = null;
-            GogData.GamesOwned result = null;
+            GogDataStructures.GamesOwned result = null;
             try
             {
                 json = webClient.DownloadString("https://embed.gog.com/user/data/games");                
-                result = JsonConvert.DeserializeObject<GogData.GamesOwned>(json);
+                result = JsonConvert.DeserializeObject<GogDataStructures.GamesOwned>(json);
                 MessageBox.Show(result.owned.Count.ToString() + " Games in account.");
             }
             catch (Exception e)
@@ -279,7 +279,7 @@ namespace gogPlugin
                         + gameId.ToString() + ".json");
 
                     if (json.Equals("[]") || json.StartsWith("<")) continue;
-                    GogData.GameDetails details = JsonConvert.DeserializeObject<GogData.GameDetails>(json);
+                    GogDataStructures.GameDetails details = JsonConvert.DeserializeObject<GogDataStructures.GameDetails>(json);
 
                      if (skipTitle.Contains(details.title))
                     {
@@ -290,18 +290,18 @@ namespace gogPlugin
                     // get aditional details
                     //json = webClient.DownloadString("http://api.gog.com/products/" 
                     //    + gameId.ToString() + "?expand=downloads,expanded_dlcs,description,screenshots,videos,related_products,changelog");
-                    //GogData.MoreGameDetails moreDetails = JsonConvert.DeserializeObject<GogData.MoreGameDetails>(json);
+                    //GogDataStructures.MoreGameDetails moreDetails = JsonConvert.DeserializeObject<GogDataStructures.MoreGameDetails>(json);
                                        
                     List<GameDownload> downloads = new List<GameDownload>();
 
                     foreach (List<object> o in details.downloads)
                     {
                         string language = (string)o[0];
-                        GogData.DownloadBySystem downloadsForLanguage =
-                            JsonConvert.DeserializeObject<GogData.DownloadBySystem>(((JObject)o[1]).ToString());
-                        List<GogData.Download> downloadsForWindows = downloadsForLanguage.windows;
+                        GogDataStructures.DownloadBySystem downloadsForLanguage =
+                            JsonConvert.DeserializeObject<GogDataStructures.DownloadBySystem>(((JObject)o[1]).ToString());
+                        List<GogDataStructures.Download> downloadsForWindows = downloadsForLanguage.windows;
 
-                        foreach (GogData.Download d in downloadsForWindows)
+                        foreach (GogDataStructures.Download d in downloadsForWindows)
                         {
                             downloads.Add(new GameDownload
                             {
@@ -436,7 +436,7 @@ namespace gogPlugin
         {
             try
             {
-                GogData.Error error = JsonConvert.DeserializeObject<GogData.Error>(json);
+                GogDataStructures.Error error = JsonConvert.DeserializeObject<GogDataStructures.Error>(json);
                 if (error.error != null)
                 {
                     MessageBox.Show(error.error + ": " + error.error_description);
