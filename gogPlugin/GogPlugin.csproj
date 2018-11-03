@@ -72,6 +72,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="forms\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\GameImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,9 +108,9 @@
     <Compile Include="forms\ProgressForm.Designer.cs">
       <DependentUpon>ProgressForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GogData.cs" />
+    <Compile Include="GogDataStructures.cs" />
+    <Compile Include="GogPlugin.cs" />
     <Compile Include="GogPluginAddGames.cs" />
-    <Compile Include="GogPluginEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
@@ -115,6 +121,9 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="forms\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\GameImportForm.resx">
       <DependentUpon>GameImportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,7 +161,7 @@
   <Import Project="packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" />
   <Import Project="packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets" Condition="Exists('packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>for /F %25%25x in ('dir /b "D:\Spiele\LaunchBox\Plugins\gogPlugin\" ^| findstr /v "Newtonsoft.Json.dll GogPlugin.dll GogPlugin.dll.config logo.png"') do del /F /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"
+    <PostBuildEvent>for /F %25%25x in ('dir /b "D:\Spiele\LaunchBox\Plugins\gogPlugin\" ^| findstr /v "Newtonsoft.Json.dll GogPlugin.dll GogPlugin.dll.config logo.png token.gog gogPlugin.ini"') do del /F /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"
 for /F %25%25x in ('dir /b /ad "D:\Spiele\LaunchBox\Plugins\gogPlugin\"') do rmdir /Q /S "D:\Spiele\LaunchBox\Plugins\gogPlugin\%25%25x"	</PostBuildEvent>
   </PropertyGroup>
 </Project>

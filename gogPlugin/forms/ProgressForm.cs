@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,24 +6,29 @@ namespace gogPlugin.forms
 {
     public partial class ProgressForm : Form
     {
-        public ProgressForm()
+        public ProgressForm(String title)
         {
             InitializeComponent();
             this.FormClosing += onClose;
+            this.Text = title;
         }
 
-        public async Task ShowProgress(Action<Progress<int>> func, string msg)
+        public async Task ShowProgress(Action<Progress<int>, Progress<String>> func)
         {
             this.progressBar1.Maximum = 100;
             this.progressBar1.Step = 1;
-            this.Text = msg;
 
-            var progress = new Progress<int>(v =>
+            var progressBar = new Progress<int>(i  =>
             {
-                progressBar1.Value = v;
+                progressBar1.Value = i;
             });
 
-            await Task.Run(() => func(progress));  
+            var progressMsg = new Progress<String>(s =>
+            {
+                this.infoText.Text = s;
+            });
+
+            await Task.Run(() => func(progressBar, progressMsg));  
         }
 
         private void onClose(object sender, EventArgs e)
