@@ -74,6 +74,7 @@ namespace gogPlugin.forms
             this.ImportGamesViewImportColumn.HeaderText = "Import";
             this.ImportGamesViewImportColumn.MinimumWidth = 60;
             this.ImportGamesViewImportColumn.Name = "ImportGamesViewImportColumn";
+            this.ImportGamesViewImportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ImportGamesViewImportColumn.Width = 60;
             // 
             // importGamesBind

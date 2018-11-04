@@ -76,6 +76,7 @@ namespace gogPlugin.forms
             this.ImportGamesViewImportColumn.HeaderText = "Import";
             this.ImportGamesViewImportColumn.MinimumWidth = 60;
             this.ImportGamesViewImportColumn.Name = "ImportGamesViewImportColumn";
+            this.ImportGamesViewImportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ImportGamesViewImportColumn.Width = 60;
             // 
             // ImportGamesViewDownloadColumn
@@ -86,6 +87,7 @@ namespace gogPlugin.forms
             this.ImportGamesViewDownloadColumn.HeaderText = "Download";
             this.ImportGamesViewDownloadColumn.MinimumWidth = 100;
             this.ImportGamesViewDownloadColumn.Name = "ImportGamesViewDownloadColumn";
+            this.ImportGamesViewDownloadColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ImportGamesViewDownloadColumn.ValueMember = "self";
             this.ImportGamesViewDownloadColumn.Width = 300;
             // 
