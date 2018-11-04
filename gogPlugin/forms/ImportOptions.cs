@@ -17,7 +17,7 @@ namespace gogPlugin.forms
         public bool skipByTitle { get; private set; }
         public GogPluginAddGames.Mode mode { get; private set; }
         public string galaxyPath { get; private set; }
-        public string platform { get; private set; }
+        public int platformNo { get; private set; }
 
         private GogPluginAddGames plugin;
         public TaskCompletionSource<bool> ok { get; }
@@ -32,15 +32,29 @@ namespace gogPlugin.forms
             Icon i = Icon.FromHandle(pIcon);
             this.Icon = i;
 
-            this.skipImported = this.checkBoxSkipImported.Checked;
-            this.skipByTitle = this.checkBoxSkipTitle.Checked;
-            this.galaxyPathTextBox.Text = this.galaxyPathBowser.RootFolder.ToString();
-            this.galaxyPath = this.galaxyPathBowser.RootFolder.ToString();
+            // use recent options
+            this.skipImported = plugin.skipImported;
+            this.checkBoxSkipImported.Checked = plugin.skipImported;
+
+            this.skipByTitle = plugin.skipByTitle;
+            this.checkBoxSkipTitle.Checked = plugin.skipByTitle;
+
+            if (plugin.galaxyPath == null)
+            {
+                this.galaxyPathTextBox.Text = this.galaxyPathBowser.RootFolder.ToString();
+                this.galaxyPath = this.galaxyPathBowser.RootFolder.ToString();
+            } else
+            {
+                this.galaxyPathTextBox.Text = plugin.galaxyPath;
+                this.galaxyPath = plugin.galaxyPath;
+            }
+           
             this.comboBoxPlatformSelect.Items.AddRange(plugin.platforms.Values.ToArray());
-            this.comboBoxPlatformSelect.SelectedIndex = 0;
-            this.platform = (string) this.comboBoxPlatformSelect.Items[0];
-            this.comboBoxModeSelect.SelectedIndex = 0;
-            this.mode = (GogPluginAddGames.Mode)0;
+            this.comboBoxPlatformSelect.SelectedIndex = plugin.platformNo;
+
+            this.comboBoxModeSelect.SelectedIndex = (int)plugin.mode;
+            this.mode = plugin.mode;
+
             ok = new TaskCompletionSource<bool>();
         }
 
@@ -96,7 +110,7 @@ namespace gogPlugin.forms
 
         private void comboBoxPlatformSelect_valueChanged(object sender, EventArgs e)
         {
-            this.platform = (string) this.comboBoxPlatformSelect.SelectedItem;
+            this.platformNo = this.comboBoxPlatformSelect.SelectedIndex;
         }
 
         private void galaxyPathTextBox_textChanged(object sender, EventArgs e)
