@@ -306,6 +306,7 @@ namespace gogPlugin
 
             foreach (string gameId in userGames.owned)
             {
+                string messageText = "Game " + (counter + 1).ToString() + " of " + noGamesOwned.ToString();
                 // report progress
                 if (progress != null)
                 {
@@ -323,6 +324,11 @@ namespace gogPlugin
                     {
                         gamesFound.Remove(gameFound);
                     }
+                    messageText += ": " + gameFound.title;
+                    if (msg != null)
+                    {
+                        msg.Report(messageText);
+                    }
                     continue;
                 }
                 counter++;
@@ -331,6 +337,11 @@ namespace gogPlugin
                 if (skipGogId.Contains(gameId))
                 {
                     skipped++;
+                    messageText = "Skipping " + messageText;
+                    if (msg != null)                       
+                    {
+                        msg.Report(messageText);
+                    }
                     continue;
                 }
 
@@ -345,6 +356,11 @@ namespace gogPlugin
                     {
                         appendError(errorMessages, "Game with Id " + gameId.ToString(), "No game information found (skip game).");
                         failure++;
+                        messageText += ": Unknown";
+                        if (msg != null)
+                        {
+                            msg.Report(messageText);
+                        }
                         continue;
                     }
 
@@ -367,6 +383,11 @@ namespace gogPlugin
                     {
                         appendError(errorMessages, "Game with Id " + gameId.ToString(), "Invalid game information: game has no title (skip game).");
                         failure++;
+                        messageText += ": Unknown";
+                        if (msg != null)
+                        {
+                            msg.Report(messageText);
+                        }
                         continue;
                     }
                     else
@@ -375,7 +396,7 @@ namespace gogPlugin
                     }
 
                     // report curent game
-                    string messageText = "Game " + (counter + 1).ToString() + " of " + noGamesOwned.ToString() + ": " + currentGame;
+                    messageText += ": " + currentGame;
                     if (msg != null)
                     {
                         msg.Report(messageText);
@@ -442,7 +463,7 @@ namespace gogPlugin
                     _import = true,
                     _gameDetails = details,
                     _downloads = downloads,
-                    _selectedDownload = downloads[0] ?? null,
+                    _selectedDownload = downloads != null ? downloads[0] : null,
                     _gogId = gameId
                 });
             }
@@ -552,9 +573,8 @@ namespace gogPlugin
                 else if (mode.Equals(Mode.linkToDownload))
                 {
                     game.ApplicationPath = "https://embed.gog.com" + gi._selectedDownload._link;
+                    game.Version = gi._selectedDownload._version + "(" + gi._selectedDownload._language.Substring(0, 2) + ")";
                 }
-               
-                game.Version = gi._selectedDownload._version + "(" + gi._selectedDownload._language.Substring(0, 2) + ")";
             }
             PluginHelper.DataManager.Save();            
         }

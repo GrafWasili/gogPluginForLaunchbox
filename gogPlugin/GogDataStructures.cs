@@ -86,7 +86,7 @@ namespace gogPlugin
             public bool isPreOrder { get; set; }
             public int releaseTimestamp { get; set; }
             public List<String> messages { get; set; }
-            public string changelog { get; set; }
+            public List<String> changelog { get; set; }
             public string forumLink { get; set; }
             public bool isBaseProductMissing { get; set; }
             public object missingBaseProduct { get; set; }
